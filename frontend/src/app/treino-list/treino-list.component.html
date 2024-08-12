@@ -1,0 +1,81 @@
+<div>
+  <h1>Gerenciamento de Treinos</h1>
+
+  <form (ngSubmit)="buscar()">
+    <h2>Filtre pelos seguintes campos:</h2>
+    <label for="nomeTreino">Nome do Treino:</label>
+    <input type="text" id="nomeTreino" [(ngModel)]="filtro.nomeTreino" name="nomeTreino">
+
+    <label for="nomeExercicio">Nome do Exercício:</label>
+    <input type="text" id="nomeExercicio" [(ngModel)]="filtro.nomeExercicio" name="nomeExercicio">
+
+    <label for="repeticoes">Repetições:</label>
+    <input type="number" id="repeticoes" [(ngModel)]="filtro.repeticoes" name="repeticoes">
+
+    <label for="series">Séries:</label>
+    <input type="number" id="series" [(ngModel)]="filtro.series" name="series">
+
+    <label for="dataHoraCriacao">Data e Hora:</label>
+    <input type="datetime-local" id="dataHoraCriacao" [(ngModel)]="filtro.dataHoraCriacao" name="dataHoraCriacao">
+
+    <button type="submit">Pesquisar</button>
+  </form>
+
+
+  <div *ngIf="!treinoParaEditar">
+    <h2>Adicionar Novo Treino</h2>
+    <form (ngSubmit)="adicionarTreino()">
+      <label for="nomeTreino">Nome do Treino:</label>
+      <input type="text" id="nomeTreino" [(ngModel)]="novoTreino.nomeTreino" name="nomeTreino" required>
+
+      <label for="nomeExercicio">Nome do Exercício:</label>
+      <input type="text" id="nomeExercicio" [(ngModel)]="novoTreino.nomeExercicio" name="nomeExercicio" required>
+
+      <label for="repeticoes">Repetições:</label>
+      <input type="number" id="repeticoes" [(ngModel)]="novoTreino.repeticoes" name="repeticoes" required>
+
+      <label for="series">Séries:</label>
+      <input type="number" id="series" [(ngModel)]="novoTreino.series" name="series" required>
+
+      <label for="dataHoraCriacao">Data e Hora:</label>
+      <input type="datetime-local" id="dataHoraCriacao" [(ngModel)]="novoTreino.dataHoraCriacao" name="dataHoraCriacao"
+        required>
+
+      <button type="submit">Adicionar</button>
+    </form>
+  </div>
+
+  <div *ngIf="treinoParaEditar">
+    <h2>Editar Treino</h2>
+    <form (ngSubmit)="salvarEdicao()">
+      <label for="nomeTreino">Nome do Treino:</label>
+      <input type="text" id="nomeTreino" [(ngModel)]="treinoParaEditar.nomeTreino" name="nomeTreino" required>
+
+      <label for="nomeExercicio">Nome do Exercício:</label>
+      <input type="text" id="nomeExercicio" [(ngModel)]="treinoParaEditar.nomeExercicio" name="nomeExercicio" required>
+
+      <label for="repeticoes">Repetições:</label>
+      <input type="number" id="repeticoes" [(ngModel)]="treinoParaEditar.repeticoes" name="repeticoes" required>
+
+      <label for="series">Séries:</label>
+      <input type="number" id="series" [(ngModel)]="treinoParaEditar.series" name="series" required>
+
+      <label for="dataHoraCriacao">Data e Hora:</label>
+      <input type="datetime-local" id="dataHoraCriacao" [(ngModel)]="treinoParaEditar.dataHoraCriacao"
+        name="dataHoraCriacao" required>
+
+      <button type="submit">Salvar</button>
+      <button type="button" (click)="cancelarEdicao()">Cancelar</button>
+    </form>
+  </div>
+</div>
+
+
+<ul>
+  <li *ngFor="let treino of treinos">
+    {{ treino.nomeTreino }} - {{ treino.nomeExercicio }} - {{ treino.repeticoes }} repetições - {{ treino.series }}
+    séries - {{ treino.dataHoraCriacao }}
+    <button (click)="editarTreino(treino)">Editar</button>
+    <button (click)="removerTreino(treino.id)">Remover</button>
+  </li>
+</ul>
