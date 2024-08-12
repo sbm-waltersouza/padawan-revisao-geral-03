@@ -1,4 +1,4 @@
-<div>
+<div class="container">
   <h1>Gerenciamento de Treinos</h1>
 
   <form (ngSubmit)="buscar()">
@@ -21,7 +21,6 @@
     <button type="submit">Pesquisar</button>
   </form>
 
-
   <div *ngIf="!treinoParaEditar">
     <h2>Adicionar Novo Treino</h2>
     <form (ngSubmit)="adicionarTreino()">
@@ -38,8 +37,7 @@
       <input type="number" id="series" [(ngModel)]="novoTreino.series" name="series" required>
 
       <label for="dataHoraCriacao">Data e Hora:</label>
-      <input type="datetime-local" id="dataHoraCriacao" [(ngModel)]="novoTreino.dataHoraCriacao" name="dataHoraCriacao"
-        required>
+      <input type="datetime-local" id="dataHoraCriacao" [(ngModel)]="novoTreino.dataHoraCriacao" name="dataHoraCriacao" required>
 
       <button type="submit">Adicionar</button>
     </form>
@@ -61,21 +59,28 @@
       <input type="number" id="series" [(ngModel)]="treinoParaEditar.series" name="series" required>
 
       <label for="dataHoraCriacao">Data e Hora:</label>
-      <input type="datetime-local" id="dataHoraCriacao" [(ngModel)]="treinoParaEditar.dataHoraCriacao"
-        name="dataHoraCriacao" required>
+      <input type="datetime-local" id="dataHoraCriacao" [(ngModel)]="treinoParaEditar.dataHoraCriacao" name="dataHoraCriacao" required>
 
       <button type="submit">Salvar</button>
       <button type="button" (click)="cancelarEdicao()">Cancelar</button>
     </form>
   </div>
+
+  <div class="card-container">
+    <div *ngFor="let treino of treinos" class="card">
+      <div class="card-header">
+        <h3>{{ treino.nomeTreino }}</h3>
+      </div>
+      <div class="card-body">
+        <p><strong>Nome do Exercício:</strong> {{ treino.nomeExercicio }}</p>
+        <p><strong>Repetições:</strong> {{ treino.repeticoes }}</p>
+        <p><strong>Séries:</strong> {{ treino.series }}</p>
+        <p><strong>Data e Hora:</strong> {{ treino.dataHoraCriacao }}</p>
+      </div>
+      <div class="card-footer">
+        <button (click)="editarTreino(treino)">Editar</button>
+        <button (click)="removerTreino(treino.id)">Remover</button>
+      </div>
+    </div>
+  </div>
 </div>
-
-
-<ul>
-  <li *ngFor="let treino of treinos">
-    {{ treino.nomeTreino }} - {{ treino.nomeExercicio }} - {{ treino.repeticoes }} repetições - {{ treino.series }}
-    séries - {{ treino.dataHoraCriacao }}
-    <button (click)="editarTreino(treino)">Editar</button>
-    <button (click)="removerTreino(treino.id)">Remover</button>
-  </li>
-</ul>
